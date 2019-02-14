@@ -3,12 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import SearchBar from "./components/SearchBar";
 import youtube from "./api/youtube.js";
+import VideoList from './components/VideoList';
 
 interface AppProps {
 }
 
 interface AppState {
-    videos: string[]
+    videos: any[]
 }
 
 class App extends Component<AppProps, AppState> {
@@ -38,6 +39,9 @@ class App extends Component<AppProps, AppState> {
                 </div>
                 <div>
                     There are {this.state.videos.length} videos.
+                </div>
+                <div>
+                    <VideoList videos={this.state.videos}/>
                 </div>
             </div>
         );
