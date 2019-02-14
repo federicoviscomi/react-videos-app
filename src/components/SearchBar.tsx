@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 interface SearchBarProps {
+    onFormSubmit: (arg0: string) => void
 }
 
 interface SearchBarState {
-    term: string | undefined
+    term: string
 }
 
 class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     constructor(props: SearchBarProps) {
         super(props);
-        this.state = {term: undefined};
+        this.state = {term: ''};
     }
 
     render() {
@@ -34,10 +35,9 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
         );
     }
 
-
     private onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        // TODO call callback from the parent
+        this.props.onFormSubmit(this.state.term);
     }
 
     private formVideoSearchOnChange(event: React.ChangeEvent<HTMLInputElement>) {
