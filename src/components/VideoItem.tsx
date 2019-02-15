@@ -16,8 +16,11 @@ class VideoItem extends React.Component<VideoItemProps, VideoItemState> {
 
     render(): React.ReactNode {
         return (
-            <div onClick={() => this.props.onVideoSelect(this.props.video)} className="video-item item">
-                <img className="ui image" src={this.props.video.snippet.thumbnails.medium.url}/>
+            <div onClick={() => this.props.onVideoSelect(this.props.video)}
+                 className="video-item item">
+                <img alt={this.props.video.snippet.title}
+                     className="ui image"
+                     src={this.props.video.snippet.thumbnails.medium.url}/>
                 <div className="content">
                     <div className="header">
                         {this.props.video.snippet.title}
