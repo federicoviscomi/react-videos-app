@@ -2,7 +2,8 @@ import React from 'react';
 import VideoItem from './VideoItem';
 
 interface VideoListProps {
-    videos: any[]
+    videos: any[],
+    onVideoSelect: (video: any) => void
 }
 
 interface VideoListState {
@@ -15,7 +16,7 @@ class VideoList extends React.Component<VideoListProps, VideoListState> {
 
     render() {
         const renderedList = this.props.videos.map((video) => {
-            return (<VideoItem video={video}/>);
+            return (<VideoItem onVideoSelect={this.props.onVideoSelect} video={video}/>);
         });
         return (
             <div>

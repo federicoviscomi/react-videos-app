@@ -4,20 +4,29 @@ import './App.css';
 import SearchBar from "./components/SearchBar";
 import youtube from "./api/youtube.js";
 import VideoList from './components/VideoList';
+import VideoDetail from './components/VideoDetail';
 
 interface AppProps {
 }
 
 interface AppState {
-    videos: any[]
+    videos: any[],
+    selectedVideo: any
 }
 
 class App extends Component<AppProps, AppState> {
 
     constructor(props: any) {
         super(props);
-        this.state = {videos: []};
+        this.state = {
+            videos: [],
+            selectedVideo: undefined
+        };
     }
+
+    onVideoSelect: (video: any) => void = (video: any) => {
+        this.setState({selectedVideo: video});
+    };
 
     onTermSubmit = async (term: any) => {
         const response = await youtube.get('/search', {
@@ -31,18 +40,9 @@ class App extends Component<AppProps, AppState> {
     render() {
         return (
             <div className="ui container">
-                <div>
-                    Videos app
-                </div>
-                <div>
-                    <SearchBar onFormSubmit={this.onTermSubmit}/>
-                </div>
-                <div>
-                    There are {this.state.videos.length} videos.
-                </div>
-                <div>
-                    <VideoList videos={this.state.videos}/>
-                </div>
+                <SearchBar onFormSubmit={this.onTermSubmit}/>
+                <VideoDetail video={this.state.selectedVideo}/>
+                <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos}/>
             </div>
         );
     }
